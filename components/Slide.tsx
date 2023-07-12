@@ -33,7 +33,7 @@ const Slide = () => {
         Xin Chao,
       </motion.div>
       <motion.div className="text-5xl mb-8" variants={textVariants}>
-        I'm <span className="text-[#BAD2ff]">VinCent Dev</span>
+        I&apos;m <span className="text-[#BAD2ff]">VinCent Dev</span>
       </motion.div>
       <motion.div
         initial="offscreen"
@@ -41,7 +41,7 @@ const Slide = () => {
         variants={textVariants}
         className="mb-8 text-2xl"
       >
-        SGU'21 | Software Engineer
+        SGU&apos;21 | Software Engineer
       </motion.div>
       <motion.div
         className="  md:absolute md:right-[28%] md:top-[22%]"
