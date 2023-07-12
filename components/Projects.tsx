@@ -39,7 +39,7 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
   };
   return (
     <motion.div>
-      <Spacing isDeskTop />
+      <Spacing isDeskTop={isDesktop} />
       <motion.div
         className="mt-32"
         initial="offscreen"
@@ -58,6 +58,7 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
       <div className="md:flex md:flex-wrap gap-x-8 md:gap-x-24 md:justify-center">
         {listProject.map((project: projectType) => (
           <Link
+            key={project.id}
             href={project.demo}
             target="_blanck"
             className="mt-10 cursor-pointer"
@@ -90,7 +91,10 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
                     {project.language.map((item) => {
                       const IconComponent = iconMapping[item.icon];
                       return (
-                        <div className="flex mr-2 mb-2 bg-blue-400 py-1 px-2 rounded-md justify-center items-center gap-x-1 text-[10px] text-[#252525] md:px-3 md:py-2">
+                        <div
+                          className="flex mr-2 mb-2 bg-blue-400 py-1 px-2 rounded-md justify-center items-center gap-x-1 text-[10px] text-[#252525] md:px-3 md:py-2"
+                          key={item.key}
+                        >
                           {IconComponent && (
                             <IconContext.Provider value={{ className: "icon" }}>
                               <IconComponent size={16} />

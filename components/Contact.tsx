@@ -35,7 +35,7 @@ const Contact: React.FC<ContactProps> = ({ isDesktop }) => {
         {listSocial.map((social) => {
           const IconComponent = iconMapping[social.icon];
           return (
-            <Link href={social.href} target="_blanck">
+            <Link key={social.id} href={social.href} target="_blanck">
               {IconComponent && (
                 <IconContext.Provider value={{ className: "icon" }}>
                   <IconComponent size={24} />
