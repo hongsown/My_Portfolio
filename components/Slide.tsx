@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-let textVariants: Variants = {
+export let textVariants: Variants = {
   offscreen: {
     x: -200,
     opacity: 0,

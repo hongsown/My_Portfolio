@@ -1,3 +1,5 @@
+import { Url } from "next/dist/shared/lib/router/router";
+
 export interface headerType {
   title: string;
 
@@ -15,5 +17,5 @@ export interface projectType {
   image: string;
   href: string;
   language: languageType[];
-  demo?: string;
+  demo: string | Url;
 }

@@ -5,7 +5,7 @@
 html,
 body,
 :root {
-  height: 1000vh;
+  height: 100%;
   background-color: #252525;
   color-scheme: dark;
 }
