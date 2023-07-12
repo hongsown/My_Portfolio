@@ -1,4 +1,5 @@
-import { headerType, projectType } from "./type";
+import exp from "constants";
+import { headerType, projectType, socialType } from "./type";
 import { AiOutlineHtml5 } from "react-icons/ai";
 export let listHeader: headerType[] = [
   {
@@ -16,6 +17,28 @@ export let listHeader: headerType[] = [
   {
     title: "Contact",
     href: "contact",
+  },
+];
+export let listSocial: socialType[] = [
+  {
+    id: 1,
+    icon: "AiFillLinkedin",
+    href: "https://www.linkedin.com/in/nguy%E1%BB%85n-s%C6%A1n-a6656a163/",
+  },
+  {
+    id: 2,
+    icon: "AiFillGithub",
+    href: "https://github.com/ahihison",
+  },
+  {
+    id: 3,
+    icon: "AiFillMail",
+    href: "mailto:sonnguyen252003@gmail.com",
+  },
+  {
+    id: 4,
+    icon: "AiFillFacebook",
+    href: "https://www.facebook.com/profile.php?id=100013294995015",
   },
 ];
 export let listProject: projectType[] = [
@@ -114,7 +137,7 @@ export let listProject: projectType[] = [
     description:
       "This project is a real-time chat application built with ReactJS and ChatEngine. It uses WebSockets to allow users to send messages to each other in real-time. The application also includes the ability to send images and files, user authentication and registration, and the ability to create and join chat rooms.",
     image: "/image/chatapp.png",
-    demo: "https://chatvincent.netlify.app/",
+    demo: "https://github.com/ahihison/chatApplication",
     href: "https://github.com/ahihison/chatApplication",
     language: [
       {

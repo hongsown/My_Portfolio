@@ -39,7 +39,7 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
   };
   return (
     <motion.div>
-      <Spacing />
+      <Spacing isDeskTop />
       <motion.div
         className="mt-32"
         initial="offscreen"
@@ -110,7 +110,7 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
           </Link>
         ))}
       </div>
-      <div className="my-24 py-4 text-center">
+      <div className="mt-24 py-4 text-center">
         <Link
           target="_blanck"
           href="https://github.com/ahihison?tab=repositories"

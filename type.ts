@@ -10,6 +10,11 @@ export type languageType = {
   name: string;
   icon: string;
 };
+export interface socialType {
+  id: number;
+  icon: string;
+  href: string;
+}
 export interface projectType {
   id: number;
   title: string;
