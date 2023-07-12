@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  height: 1000vh;
+  background-color: #252525;
+  color-scheme: dark;
+}
