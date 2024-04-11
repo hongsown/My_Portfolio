@@ -5,6 +5,7 @@ import Experience from "@/components/Experience";
 import Header from "@/components/Header";
 import Projects from "@/components/Projects";
 import Slide from "@/components/Slide";
+import { experiences } from "@/data";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [windowSize, setWindowSize] = useState<any>({
@@ -37,7 +38,7 @@ export default function Home() {
 
       <Projects isDesktop={isDesktop} />
       <About isDesktop={isDesktop} />
-      {/* <Experience /> */}
+      <Experience experiences={experiences} />
       <Contact isDesktop={isDesktop} />
     </div>
   );

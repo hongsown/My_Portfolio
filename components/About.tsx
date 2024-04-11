@@ -1,10 +1,11 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
-import Spacing from "./Spacing";
-import { motion, Variants } from "framer-motion";
 import { textVariants } from "./Slide";
+import Spacing from "./Spacing";
 interface AboutProps {
   isDesktop: boolean;
 }
+
 const About: React.FC<AboutProps> = ({ isDesktop }) => {
   return (
     <>

@@ -1,6 +1,7 @@
 import exp from "constants";
 import { headerType, projectType, socialType } from "./type";
 import { AiOutlineHtml5 } from "react-icons/ai";
+import { experienceType } from "./types";
 export let listHeader: headerType[] = [
   {
     title: "Projects",
@@ -166,6 +167,68 @@ export let listProject: projectType[] = [
         name: "TypeScript",
         icon: "SiTypescript",
       },
+    ],
+  },
+];
+
+
+export const experiences: experienceType[] = [
+  {
+    id: "exp7",
+    companies: "Công ty STECH",
+    role: "Front End Intern",
+    date: "July 2023 -November 2023 ",
+    link: "https://www.facebook.com/stechorg/",
+    description: [
+      "💙 Conducted research and authored a report on sockets, Metamask login optimization when sending data, and the use of Client-Side Rendering and Server-Side Rendering",
+      "💙 Feature Development: Collaborated with the team to build new features that improve user interaction and functionality.",
+      "💙 UX/UI Optimization: Conducted research and implemented design improvements to streamline user flows, enhance clarity, and create a more intuitive user experience. "
+    ],
+  },
+  {
+    id: "exp6",
+    companies: "Code Club Vietnam Community",
+    role: "Full Stack Developer",
+    date: "Feb 2023 - Present",
+    link: "https://github.com/DRAFALO",
+    description: [
+      "💙 Thriving communities of PET project enthusiasts fostering knowledge exchange and mutual learning. ",
+      "💙 Collaborated with experienced senior and junior developers on real-world projects.",
+      "💙Develop the user interface (UI) for a blog website aimed at developers. Contribute to the design process of the website and familiarize yourself with Git workflow and the rules governing real company projects. Additionally, develop APIs using NestJS and implement continuous integration and continuous deployment (CI/CD) pipelines..",
+    ],
+  },
+  {
+    id: "exp4",
+    companies: "SGU Hackathon 2024",
+    role: "Vice President",
+    date: " March 2024",
+    link: "https://www.facebook.com/photo/?fbid=910015674245319&set=pcb.910036530909900",
+    description: [
+      "💙 At the SGU Hackathon, my team and I developed a project titled 'Protecting the Environment,' which ultimately won us the first prize.",
+      "💙 We collaborated on developing the user interface (UI) and API to integrate with an AI model designed to detect waste. Our goal was to create a system that could identify various types of waste and provide users with the nearest recycling plant locations on a map.",
+    ],
+  },
+  {
+    id: "exp1",
+    companies: "Programming Tutor",
+    role: "Tutor",
+    date: "May 2023 - Present",
+    link: "",
+    description: [
+      "💙 Helping my students understand the fundamentals of programming, data structures, and algorithms is essential for laying a strong foundation in computer science",
+      "💙 My student's confidence in coding and successful performance across most subjects at school reflects their dedication and aptitude for learning",
+    ],
+  },
+  
+  {
+    id: "exp5",
+    companies: "Freelance",
+    role: "Camp Cloud",
+    date: "April 2024 - Present",
+    link: "",
+    description: [
+      "💙Joining a project with a major company as a Frontend Developer presents an exciting opportunity to contribute to impactful projects and further develop skills in web development.",
+      "💙 Collaborating with the backend team to develop the user interface and integrate APIs is a crucial aspect of my role as a Frontend Developer. Working together ensures seamless functionality and a cohesive user experience for our project.",
     ],
   },
 ];
