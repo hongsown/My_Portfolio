@@ -67,7 +67,7 @@ const Slide = () => {
         <Link
           target="_blank"
           className="text-black font-bold bg-[#bad2ff] p-2 w-[124px] mx-auto rounded-lg text-[18px] hover:text-white transition cursor-pointer hover:bg-[#6f7f9b] "
-          href="https://smallpdf.com/vi/edit-pdf#local_job=1712818905808&r=app"
+          href="https://www.topcv.vn/xem-cv/CVBWUABSCllWV18PD1EAVgACUgEHBAcBBQcCBw5cbe"
         >
           My resume
         </Link>

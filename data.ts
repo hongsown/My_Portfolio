@@ -175,6 +175,18 @@ export let listProject: projectType[] = [
 export const experiences: experienceType[] = [
   {
     id: "exp7",
+    companies: "Freelance",
+    role: "Camp Cloud",
+    date: "April 2024 - Present",
+    link: "",
+    description: [
+      "💙Joining a project with a major company as a Frontend Developer presents an exciting opportunity to contribute to impactful projects and further develop skills in web development.",
+      "💙 Collaborating with the backend team to develop the user interface and integrate APIs is a crucial aspect of my role as a Frontend Developer. Working together ensures seamless functionality and a cohesive user experience for our project.",
+    ],
+
+  },
+  {
+    id: "exp5",
     companies: "Công ty STECH",
     role: "Front End Intern",
     date: "July 2023 -November 2023 ",
@@ -219,16 +231,6 @@ export const experiences: experienceType[] = [
       "💙 My student's confidence in coding and successful performance across most subjects at school reflects their dedication and aptitude for learning",
     ],
   },
-  
-  {
-    id: "exp5",
-    companies: "Freelance",
-    role: "Camp Cloud",
-    date: "April 2024 - Present",
-    link: "",
-    description: [
-      "💙Joining a project with a major company as a Frontend Developer presents an exciting opportunity to contribute to impactful projects and further develop skills in web development.",
-      "💙 Collaborating with the backend team to develop the user interface and integrate APIs is a crucial aspect of my role as a Frontend Developer. Working together ensures seamless functionality and a cohesive user experience for our project.",
-    ],
-  },
+
+
 ];
