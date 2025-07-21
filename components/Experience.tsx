@@ -3,13 +3,7 @@ import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import React, { useState } from "react";
 import { experienceType } from "../types";
-import Heading1, {
-  Paragraph0,
-  Paragraph2,
-  Paragraph3,
-} from "./Heading";
-import { Spacing2 } from "./Spacing";
-import { textVariants } from "./Greeting";
+import { FaBriefcase, FaCalendarAlt, FaExternalLinkAlt } from "react-icons/fa";
 
 interface expProps {
   experiences: experienceType[];
@@ -17,7 +11,7 @@ interface expProps {
 
 const expVariant: Variants = {
   offscreen: {
-    x: 300,
+    x: 50,
     opacity: 0,
   },
   onscreen: {
@@ -31,135 +25,140 @@ const expVariant: Variants = {
   },
 };
 
-const Experience: React.FC<expProps> = (props) => {
-  const { experiences } = props;
-  const myCompanies: string[] = [];
-  experiences?.map((exp) => {
-    myCompanies.push(exp.companies);
-  });
-  const [choices, setChoices] = useState(String(myCompanies[0]));
+const Experience: React.FC<expProps> = ({ experiences }) => {
+  const [selectedCompany, setSelectedCompany] = useState(experiences[0]?.companies || "");
+  
   return (
-    <Spacing2>
-      <motion.div
-        className="mt-10"
-        initial="offscreen"
-        whileInView="onscreen"
+    <div className="py-20 max-w-7xl mx-auto px-4" id="experience">
+      <motion.h2
+        className="text-4xl md:text-5xl font-bold text-center mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        variants={textVariants}
+        transition={{ duration: 0.8 }}
       >
-        <Heading1 content="Experience" />
-      </motion.div>
-      <motion.div
-        id="experience"
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true }}
-        variants={textVariants}
-        className="mb-[-2.5rem] flex flex-col overflow-hidden md:flex-row md:items-center min-h-[400px]"
-      >
-        <NavBar
-          company={myCompanies}
-          setChoices={setChoices}
-          choices={choices}
-        />
-        <section className="mt-3 mx-12 flex md:mx-0 md:mt-0 lg:min-w-[900px] md:min-w-[700px] md:min-h-[235px]">
-          {experiences?.map((experience) => {
-            return (
-              <div className="text-white-400" key={experience.id}>
-                <Container
-                  companies={experience.companies}
-                  choices={choices}
-                  role={experience.role}
-                  link={experience.link}
-                  date={experience.date}
-                  description={experience.description}
-                />
-              </div>
-            );
-          })}
-        </section>
-      </motion.div>
-    </Spacing2>
-  );
-};
-
-interface navProps {
-  company: string[];
-  choices: string;
-  setChoices: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const NavBar: React.FC<navProps> = (props) => {
-  const { company, setChoices, choices } = props;
-  return (
-    <nav className="w-[calc(100vw_-_30px)] mt-10 mx-10 flex overflow-x-scroll md:flex-col md:max-w-[calc(20vw_-_30px)] md:mt-0 md:overflow-hidden">
-      {company.map((comp, id) => {
-        return (
-          <button
-            key={id}
-            className={
-              comp === choices
-                ? "border-b-2 border-blue-500 bg-white/10 p-2 text-blue-500 transition-colors duration-300 font-semibold mr-10 min-w-max flex"
-                : "mr-10 min-w-max flex p-2"
-            }
-          >
-            <span
-              className="text-14 md:text-16"
-              onClick={(e) => setChoices(String(e.currentTarget.textContent))}
-            >
-              {comp}
-            </span>
-          </button>
-        );
-      })}
-    </nav>
-  );
-};
-
-interface containerProps {
-  companies: string;
-  role: string;
-  date: string;
-  link: string;
-  description: string[];
-  choices: string;
-}
-
-const Container: React.FC<containerProps> = (props) => {
-  const { companies, role, link, date, choices, description } = props;
-  const companiesTag = (
-    <>
-      {`${role}`}
-      <Link href={link} target="_blank"
-        className="ml-1 text-16 text-blue-500 font-semibold cursor-pointer hover:text-blue-400 transition-colors duration-300 md:text-20">
-
-        {`@${companies}`}
-
-      </Link>
-    </>
-  );
-  return (
-    <>
-      {companies === choices && (
+        <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          Experience
+        </span>
+      </motion.h2>
+      
+      <div className="flex flex-col lg:grid lg:grid-cols-4 gap-6 lg:gap-8">
+        {/* Company Navigation */}
         <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
+          className="lg:col-span-1 order-1"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          variants={expVariant}
-          className="flex flex-col items-start"
+          transition={{ duration: 0.8 }}
         >
-          <Paragraph0 content={companiesTag} />
-          <Paragraph3 content={date} />
-          {description.map((desc, id) => {
+          {/* Mobile/Tablet Horizontal Scroll */}
+          <div className="lg:hidden">
+            <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
+              {experiences.map((exp) => (
+                <button
+                  key={exp.id}
+                  onClick={() => setSelectedCompany(exp.companies)}
+                  className={`
+                    relative px-4 py-2 text-sm font-medium whitespace-nowrap
+                    transition-all duration-300 rounded-full flex-shrink-0
+                    ${selectedCompany === exp.companies
+                      ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg"
+                      : "text-gray-400 bg-gray-800/50 hover:text-white hover:bg-gray-700/50"
+                    }
+                  `}
+                >
+                  {exp.companies.split(' ')[0]} {/* Show first word only on mobile */}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Vertical Tabs */}
+          <div className="hidden lg:flex flex-col gap-2">
+            {experiences.map((exp) => (
+              <button
+                key={exp.id}
+                onClick={() => setSelectedCompany(exp.companies)}
+                className={`
+                  relative px-4 py-3 text-left text-sm font-medium
+                  transition-all duration-300 rounded-lg
+                  ${selectedCompany === exp.companies
+                    ? "bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-white"
+                    : "text-gray-400 hover:text-white hover:bg-gray-800/50"
+                  }
+                `}
+              >
+                <span className="relative z-10">{exp.companies}</span>
+                {selectedCompany === exp.companies && (
+                  <motion.div
+                    className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-purple-500 to-blue-500 rounded-l-lg"
+                    layoutId="activeTab"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+        
+        {/* Experience Details */}
+        <div className="lg:col-span-3 order-2">
+          {experiences.map((experience) => {
+            if (experience.companies !== selectedCompany) return null;
+            
             return (
-              <div key={id}>
-                <Paragraph2 content={desc} />
-              </div>
+              <motion.div
+                key={experience.id}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
+                variants={expVariant}
+                className="space-y-4 lg:space-y-6"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-4 lg:mb-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-100">
+                      {experience.role}
+                    </h3>
+                    {experience.link && (
+                      <Link
+                        href={experience.link}
+                        target="_blank"
+                        className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors text-sm"
+                      >
+                        <span>@{experience.companies}</span>
+                        <FaExternalLinkAlt className="text-xs" />
+                      </Link>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-gray-400">
+                    <FaCalendarAlt className="text-sm flex-shrink-0" />
+                    <span className="text-sm">{experience.date}</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-3 lg:space-y-4">
+                  {experience.description.map((desc, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-gray-300 leading-relaxed text-sm lg:text-base">{desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             );
           })}
-        </motion.div>
-      )}
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 

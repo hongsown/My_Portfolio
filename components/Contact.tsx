@@ -1,8 +1,5 @@
 import Link from "next/link";
-import Spacing from "./Spacing";
-interface ContactProps {
-  isDesktop: boolean;
-}
+import { motion } from "framer-motion";
 import {
   AiFillLinkedin,
   AiFillGithub,
@@ -10,7 +7,11 @@ import {
   AiFillFacebook,
 } from "react-icons/ai";
 import { listSocial } from "@/data";
-import { IconContext, IconType } from "react-icons";
+import { IconType } from "react-icons";
+
+interface ContactProps {
+  isDesktop: boolean;
+}
 
 const Contact: React.FC<ContactProps> = ({ isDesktop }) => {
   const iconMapping: { [key: string]: IconType } = {
@@ -19,45 +20,83 @@ const Contact: React.FC<ContactProps> = ({ isDesktop }) => {
     AiFillMail,
     AiFillFacebook,
   };
+
   return (
-    <>
-      <Spacing isDeskTop={isDesktop} />
-      <div
-        id="contact"
-        className="font-bold text-5xl flex justify-center mt-20 text-[#bad2ff]"
+    <div className="py-20 max-w-4xl mx-auto px-4" id="contact">
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
       >
-        Contact Me
-      </div>
-      <div className="font-bold text-center my-16 px-8">
-        Currently active looking for Summer 2023 Software Engineer internship.
-      </div>
-      <div className="flex justify-center items-center gap-x-12 text-[#bad2ff] cursor-pointer">
-        {listSocial.map((social) => {
-          const IconComponent = iconMapping[social.icon];
-          return (
-            <Link key={social.id} href={social.href} target="_blanck">
-              {IconComponent && (
-                <IconContext.Provider value={{ className: "icon" }}>
-                  <IconComponent size={24} />
-                </IconContext.Provider>
-              )}
-            </Link>
-          );
-        })}
-      </div>
+        <h2 className="text-4xl md:text-5xl font-bold mb-8">
+          <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            Get In Touch
+          </span>
+        </h2>
+        
+        <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
+          I&apos;m a Full Stack Developer specializing in Web3 and blockchain technologies. 
+          Feel free to reach out for collaboration, opportunities, or just to connect!
+        </p>
+
+        <div className="flex flex-col items-center gap-8">
+          <Link
+            href="mailto:sonnguyen252003@gmail.com"
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:scale-105"
+          >
+            Say Hello
+          </Link>
+
+          <div className="flex gap-6">
+            {listSocial.map((social) => {
+              const IconComponent = iconMapping[social.icon];
+              return (
+                <motion.div
+                  key={social.id}
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Link
+                    href={social.href}
+                    target="_blank"
+                    className="p-3 bg-gray-800/50 backdrop-blur-sm rounded-full hover:bg-gray-700/50 transition-all block"
+                  >
+                    {IconComponent && (
+                      <IconComponent size={24} className="text-gray-300 hover:text-white transition-colors" />
+                    )}
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </motion.div>
+
       <Footer />
-    </>
+    </div>
   );
 };
+
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <footer className="text-center text-12 my-6 md:text-16">
-      <p>
-        Designed and made with 💙 by
-        <span className="font-semibold"> Vincent Dev </span>
+    <motion.footer 
+      className="text-center mt-20 py-8 border-t border-gray-800"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      <p className="text-gray-400 text-sm">
+        Designed & Built by{" "}
+        <span className="text-purple-400 font-semibold">Nguyen Hong Son</span>
       </p>
-      <p className="font-semibold"> @2023 </p>
-    </footer>
+      <p className="text-gray-500 text-xs mt-2">© {currentYear} All rights reserved</p>
+    </motion.footer>
   );
 };
+
 export default Contact;

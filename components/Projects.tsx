@@ -18,14 +18,16 @@ interface projectProps {
 }
 const projectVariant: Variants = {
   offscreen: {
-    y: 300,
+    y: 50,
+    opacity: 0,
   },
   onscreen: {
-    y: 50,
+    y: 0,
+    opacity: 1,
     transition: {
       type: "spring",
       bounce: 0.4,
-      duration: 1,
+      duration: 0.8,
     },
   },
 };
@@ -38,91 +40,119 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
     SiTypescript,
   };
   return (
-    <motion.div>
-      <Spacing isDeskTop={isDesktop} />
+    <motion.div className="py-20" id="projects">
       <motion.div
-        className="mt-32"
+        className="max-w-7xl mx-auto px-4"
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true }}
         variants={textVariants}
       >
-        <motion.h1
-          className="text-5xl font-bold text-[#bad2ff] flex justify-center"
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold text-center mb-16"
           variants={textVariants}
         >
-          Projects
-        </motion.h1>
-      </motion.div>
+          <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            Featured Projects
+          </span>
+        </motion.h2>
 
-      <div className="md:flex md:flex-wrap gap-x-8 md:gap-x-24 md:justify-center">
-        {listProject.map((project: projectType) => (
-          <Link
-            key={project.id}
-            href={project.demo}
-            target="_blanck"
-            className="mt-10 cursor-pointer"
-          >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {listProject.map((project: projectType, index) => (
             <motion.div
+              key={project.id}
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true }}
               variants={projectVariant}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 1 }}
-              id="projects"
-              className="mt-10 max-w-[320px]  max-h-[320px] bg-[#ededed]
-          mx-auto rounded-lg  md:max-w-[330px] md:text-[16px] md:min-w-[300px] md:min-h-[450px] md:max-h-[490px]"
+              custom={index}
+              className="group relative"
             >
-              <motion.div className="flex flex-col">
-                <Image
-                  className="overflow-hidden rounded-t-lg md:min-h-[200px]"
-                  width={isDesktop ? "625" : "320"}
-                  height={isDesktop ? "400" : "149"}
-                  src={project.image}
-                  alt="Mp3 project picture"
-                />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
+              <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all">
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    width={400}
+                    height={200}
+                    src={project.image}
+                    alt={project.title}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60" />
+                </div>
 
-                <div className="h-[60%]  ">
-                  <div className="text-[#252525] text-[16px] font-bold my-4 text-center md:text-[18px]">
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-100 mb-3">
                     {project.title}
-                  </div>
-                  <div className="flex flex-wrap text-8 font-bold justify-start ml-3">
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.language.map((item) => {
                       const IconComponent = iconMapping[item.icon];
                       return (
                         <div
-                          className="flex mr-2 mb-2 bg-blue-400 py-1 px-2 rounded-md justify-center items-center gap-x-1 text-[10px] text-[#252525] md:px-3 md:py-2"
+                          className="flex items-center gap-1 px-3 py-1 bg-gray-700/50 rounded-full text-xs text-gray-300"
                           key={item.key}
                         >
                           {IconComponent && (
-                            <IconContext.Provider value={{ className: "icon" }}>
-                              <IconComponent size={16} />
-                            </IconContext.Provider>
+                            <IconComponent className="text-sm" />
                           )}
-                          {item.name}
+                          <span>{item.name}</span>
                         </div>
                       );
                     })}
                   </div>
-                  <div className="overflow-hidden max-h-[60px] mb-[32px]  max-w-[368px] text-[10px] text-[#252525] font-medium mx-3 md:text-[14px] md:mt-4">
-                    {project.description}
+
+                  <div className="flex gap-3">
+                    {project.demo && project.href ? (
+                      <>
+                        <Link
+                          href={project.demo}
+                          target="_blank"
+                          className="flex-1 text-center py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+                        >
+                          Live Demo
+                        </Link>
+                        <Link
+                          href={project.href}
+                          target="_blank"
+                          className="flex-1 text-center py-2 border border-gray-600 text-gray-300 rounded-lg font-medium hover:border-gray-400 hover:text-white transition-all"
+                        >
+                          Source Code
+                        </Link>
+                      </>
+                    ) : (
+                      <div className="flex-1 text-center py-2 bg-gray-700/50 text-gray-400 rounded-lg font-medium cursor-not-allowed">
+                        🔒 Private Project
+                      </div>
+                    )}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
-          </Link>
-        ))}
-      </div>
-      <div className="mt-24 py-4 text-center">
-        <Link
-          target="_blanck"
-          href="https://github.com/ahihison?tab=repositories"
-          className="relative text-center text-[#BAD2ff] font-bold text-[18px] mb-10 hover:text-[#6f7f9b] transition"
+          ))}
+        </div>
+        
+        <motion.div 
+          className="mt-16 text-center"
+          variants={textVariants}
         >
-          See more in my Github
-        </Link>
-      </div>
+          <Link
+            target="_blank"
+            href="https://github.com/hongsown?tab=repositories"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+          >
+            <span>View all projects on GitHub</span>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </Link>
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 };

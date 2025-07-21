@@ -29,7 +29,7 @@ export let listSocial: socialType[] = [
   {
     id: 2,
     icon: "AiFillGithub",
-    href: "https://github.com/ahihison",
+    href: "https://github.com/hongsown",
   },
   {
     id: 3,
@@ -43,6 +43,84 @@ export let listSocial: socialType[] = [
   },
 ];
 export let listProject: projectType[] = [
+  {
+    id: 7,
+    title: "Web3 Gaming Platform",
+    description:
+      "Turn-based Web3 game with custom blockchain integration using Cosmos SDK. Features on-chain game logic, token modules, wallet integration (Leap/Keplr), and real-time gameplay via WebSocket. Built to handle 1,000+ concurrent users with sub-500ms latency.",
+    image: "https://tse3.mm.bing.net/th/id/OIP.0FrWD9H5O-EQCzeYa3UwlQHaEY?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+    demo: "",
+    href: "",
+    language: [
+      {
+        key: "react",
+        name: "ReactJS",
+        icon: "AiOutlineHtml5",
+      },
+      {
+        key: "nestjs",
+        name: "NestJS",
+        icon: "TbBrandNextjs",
+      },
+      {
+        key: "cosmos",
+        name: "Cosmos SDK",
+        icon: "SiTypescript",
+      },
+    ],
+  },
+  {
+    id: 8,
+    title: "AI Camera Management System",
+    description:
+      "Comprehensive camera management system with integrated AI capabilities for surveillance and analytics. Implemented real-time video streaming with HLS, reducing latency to 2 seconds. Increased user engagement by 20% through interactive features.",
+    image: "/image/camera-ai.png",
+    demo: "",
+    href: "",
+    language: [
+      {
+        key: "react",
+        name: "ReactJS",
+        icon: "AiOutlineHtml5",
+      },
+      {
+        key: "angular",
+        name: "Angular",
+        icon: "TbBrandNextjs",
+      },
+      {
+        key: "aws",
+        name: "AWS",
+        icon: "SiTypescript",
+      },
+    ],
+  },
+  {
+    id: 9,
+    title: "Blockchain Explorer",
+    description:
+      "Built comprehensive admin dashboards and Chrome extensions for blockchain data monitoring. Developed backend service to sync blockchain data (blocks, transactions, events) into PostgreSQL for explorer and admin monitoring with CI/CD pipelines.",
+    image: "https://tse1.mm.bing.net/th/id/OIP.UIgOfb8wd8JRHwVaSZqYuQHaEf?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+    demo: "https://stochainscan.io/en",
+    href: "https://stochainscan.io/en",
+    language: [
+      {
+        key: "nextjs",
+        name: "NextJS",
+        icon: "TbBrandNextjs",
+      },
+      {
+        key: "nestjs",
+        name: "NestJS",
+        icon: "TbBrandNextjs",
+      },
+      {
+        key: "postgresql",
+        name: "PostgreSQL",
+        icon: "SiTypescript",
+      },
+    ],
+  },
   {
     id: 1,
     title: "MP3 Player",
@@ -149,7 +227,7 @@ export let listProject: projectType[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     title: "Portfolio Website",
     description:
       "My project is to introduce myself and expand my knowledge during the summer of 2023. I will dedicate this time to self-discovery and pursue various areas of interest to broaden my understanding and skills.",
@@ -169,21 +247,39 @@ export let listProject: projectType[] = [
       },
     ],
   },
+ 
 ];
 
 
 export const experiences: experienceType[] = [
   {
-    id: "exp7",
-    companies: "Freelance",
-    role: "Camp Cloud",
-    date: "April 2024 - Present",
+    id: "exp8",
+    companies: "XCLUSIVE CORPORATION",
+    role: "Full Stack Developer",
+    date: "November 2024 - May 2025",
     link: "",
     description: [
-      "💙Joining a project with a major company as a Frontend Developer presents an exciting opportunity to contribute to impactful projects and further develop skills in web development.",
-      "💙 Collaborating with the backend team to develop the user interface and integrate APIs is a crucial aspect of my role as a Frontend Developer. Working together ensures seamless functionality and a cohesive user experience for our project.",
+      "Built admin dashboards and Chrome extensions using NextJS for blockchain monitoring and management.",
+      "Developed custom blockchain using Cosmos SDK with token modules and wallet integration (Leap/Keplr).",
+      "Created turn-based Web3 game dApp with on-chain logic and off-chain services for player management.",
+      "Implemented backend service to sync blockchain data into PostgreSQL for explorer and admin monitoring.",
+      "Built real-time gameplay system with WebSocket using NestJS backend and ReactJS frontend.",
+      "Deployed full system on VPS with CI/CD pipelines, optimized for 1,000+ concurrent users with sub-500ms latency.",
     ],
-
+  },
+  {
+    id: "exp7",
+    companies: "AIS TECHNOLOGY SERVICES",
+    role: "Freelance Frontend Developer",
+    date: "April 2024 - May 2025",
+    link: "",
+    description: [
+      "Developed comprehensive camera management system with integrated AI capabilities using ReactJS and ChakraUI.",
+      "Collaborated with Backend team using Golang to ensure seamless API integration and system stability.",
+      "Increased user engagement by 20% by implementing new interactive features and improving UI/UX.",
+      "Reduced video stream latency to 2 seconds (HLS) from real-time, significantly improving user experience.",
+      "Fixed critical bugs and implemented change requests to enhance system stability and performance.",
+    ],
   },
   {
     id: "exp5",

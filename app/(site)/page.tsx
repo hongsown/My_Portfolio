@@ -32,14 +32,15 @@ export default function Home() {
     }
   });
   return (
-    <div className="lg:mx-[160px]">
+    <div className="min-h-screen">
       <Header />
-      <Slide />
-
-      <Projects isDesktop={isDesktop} />
-      <About isDesktop={isDesktop} />
-      <Experience experiences={experiences} />
-      <Contact isDesktop={isDesktop} />
+      <main className="pt-20">
+        <Slide />
+        <Projects isDesktop={isDesktop} />
+        <About isDesktop={isDesktop} />
+        <Experience experiences={experiences} />
+        <Contact isDesktop={isDesktop} />
+      </main>
     </div>
   );
 }
