@@ -30,7 +30,7 @@ export default function Home() {
     } else {
       setIsDesktop(false);
     }
-  });
+  }, [windowSize.width]);
   return (
     <div className="min-h-screen">
       <Header />

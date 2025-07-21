@@ -127,25 +127,72 @@ const About: React.FC<AboutProps> = ({ isDesktop }) => {
               <motion.div
                 key={category.title}
                 className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  delay: index * 0.2,
+                  type: "spring",
+                  bounce: 0.4,
+                  duration: 0.8
+                }}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-xl font-semibold mb-4 text-gray-200">
+                <motion.h4 
+                  className="text-xl font-semibold mb-4 text-gray-200"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.2 + 0.3 }}
+                  viewport={{ once: true }}
+                >
                   {category.title}
-                </h4>
+                </motion.h4>
                 <div className="grid grid-cols-2 gap-4">
-                  {category.skills.map((skill) => {
+                  {category.skills.map((skill, skillIndex) => {
                     const Icon = skill.icon;
                     return (
-                      <div
+                      <motion.div
                         key={skill.name}
-                        className="flex items-center gap-2 p-3 bg-gray-900/50 rounded-lg hover:bg-gray-700/50 transition-all"
+                        className="flex items-center gap-2 p-3 bg-gray-900/50 rounded-lg hover:bg-gray-700/50 transition-all cursor-pointer group"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ 
+                          delay: index * 0.2 + skillIndex * 0.1 + 0.5,
+                          type: "spring",
+                          bounce: 0.5,
+                          duration: 0.6
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          backgroundColor: "rgba(55, 65, 81, 0.7)",
+                          transition: { duration: 0.2 }
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        viewport={{ once: true }}
                       >
-                        <Icon className={`text-2xl ${skill.color}`} />
-                        <span className="text-sm text-gray-300">{skill.name}</span>
-                      </div>
+                        <motion.div
+                          animate={{ 
+                            rotate: [0, 5, -5, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: skillIndex * 0.5,
+                            ease: "easeInOut"
+                          }}
+                          whileHover={{ 
+                            rotate: [0, 360],
+                            transition: { duration: 0.6 }
+                          }}
+                        >
+                          <Icon className={`text-2xl ${skill.color} group-hover:scale-110 transition-transform`} />
+                        </motion.div>
+                        <span className="text-sm text-gray-300 group-hover:text-white transition-colors">{skill.name}</span>
+                      </motion.div>
                     );
                   })}
                 </div>

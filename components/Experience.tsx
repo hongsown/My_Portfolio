@@ -55,7 +55,7 @@ const Experience: React.FC<expProps> = ({ experiences }) => {
           <div className="lg:hidden">
             <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
               {experiences.map((exp) => (
-                <button
+                <motion.button
                   key={exp.id}
                   onClick={() => setSelectedCompany(exp.companies)}
                   className={`
@@ -66,9 +66,19 @@ const Experience: React.FC<expProps> = ({ experiences }) => {
                       : "text-gray-400 bg-gray-800/50 hover:text-white hover:bg-gray-700/50"
                     }
                   `}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={selectedCompany === exp.companies ? {
+                    boxShadow: [
+                      "0 0 0 0 rgba(168, 85, 247, 0.7)",
+                      "0 0 0 8px rgba(168, 85, 247, 0)",
+                      "0 0 0 0 rgba(168, 85, 247, 0)"
+                    ]
+                  } : {}}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
                   {exp.companies.split(' ')[0]} {/* Show first word only on mobile */}
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -76,7 +86,7 @@ const Experience: React.FC<expProps> = ({ experiences }) => {
           {/* Desktop Vertical Tabs */}
           <div className="hidden lg:flex flex-col gap-2">
             {experiences.map((exp) => (
-              <button
+              <motion.button
                 key={exp.id}
                 onClick={() => setSelectedCompany(exp.companies)}
                 className={`
@@ -87,16 +97,34 @@ const Experience: React.FC<expProps> = ({ experiences }) => {
                     : "text-gray-400 hover:text-white hover:bg-gray-800/50"
                   }
                 `}
+                whileHover={{ 
+                  scale: 1.02,
+                  x: 5,
+                  transition: { type: "spring", bounce: 0.4, duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.98 }}
               >
                 <span className="relative z-10">{exp.companies}</span>
                 {selectedCompany === exp.companies && (
                   <motion.div
                     className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-purple-500 to-blue-500 rounded-l-lg"
                     layoutId="activeTab"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      boxShadow: [
+                        "0 0 0 0 rgba(168, 85, 247, 0.7)",
+                        "0 0 0 4px rgba(168, 85, 247, 0.3)",
+                        "0 0 0 0 rgba(168, 85, 247, 0)"
+                      ]
+                    }}
+                    transition={{ 
+                      opacity: { type: "spring", bounce: 0.2, duration: 0.6 },
+                      boxShadow: { duration: 2, repeat: Infinity }
+                    }}
                   />
                 )}
-              </button>
+              </motion.button>
             ))}
           </div>
         </motion.div>

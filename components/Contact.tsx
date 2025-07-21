@@ -50,13 +50,27 @@ const Contact: React.FC<ContactProps> = ({ isDesktop }) => {
           </Link>
 
           <div className="flex gap-6">
-            {listSocial.map((social) => {
+            {listSocial.map((social, index) => {
               const IconComponent = iconMapping[social.icon];
               return (
                 <motion.div
                   key={social.id}
-                  whileHover={{ y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    delay: index * 0.1,
+                    type: "spring",
+                    bounce: 0.5,
+                    duration: 0.6
+                  }}
+                  whileHover={{ 
+                    y: -10,
+                    scale: 1.2,
+                    rotate: [0, -10, 10, 0],
+                    transition: { duration: 0.3 }
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                  viewport={{ once: true }}
                 >
                   <Link
                     href={social.href}
@@ -64,7 +78,19 @@ const Contact: React.FC<ContactProps> = ({ isDesktop }) => {
                     className="p-3 bg-gray-800/50 backdrop-blur-sm rounded-full hover:bg-gray-700/50 transition-all block"
                   >
                     {IconComponent && (
-                      <IconComponent size={24} className="text-gray-300 hover:text-white transition-colors" />
+                      <motion.div
+                        animate={{ 
+                          rotate: [0, 5, -5, 0],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          delay: index * 0.5,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <IconComponent size={24} className="text-gray-300 hover:text-white transition-colors" />
+                      </motion.div>
                     )}
                   </Link>
                 </motion.div>

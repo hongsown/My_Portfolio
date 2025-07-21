@@ -13,24 +13,60 @@ import { motion, Variants } from "framer-motion";
 import { textVariants } from "./Slide";
 import Link from "next/link";
 import { projectType } from "@/type";
+
 interface projectProps {
   isDesktop: boolean;
 }
+
 const projectVariant: Variants = {
   offscreen: {
-    y: 50,
+    y: 80,
     opacity: 0,
+    scale: 0.8,
   },
   onscreen: {
     y: 0,
     opacity: 1,
+    scale: 1,
     transition: {
       type: "spring",
-      bounce: 0.4,
+      bounce: 0.3,
       duration: 0.8,
     },
   },
 };
+
+const containerVariants: Variants = {
+  offscreen: {
+    opacity: 0,
+  },
+  onscreen: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardHoverVariants = {
+  hover: {
+    y: -10,
+    scale: 1.02,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.3,
+    },
+  },
+  tap: {
+    scale: 0.98,
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
+
 const Projects: React.FC<projectProps> = ({ isDesktop }) => {
   const iconMapping: { [key: string]: IconType } = {
     AiOutlineHtml5,
@@ -39,6 +75,7 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
     TbBrandNextjs,
     SiTypescript,
   };
+
   return (
     <motion.div className="py-20" id="projects">
       <motion.div
@@ -57,28 +94,59 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
           </span>
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true }}
+        >
           {listProject.map((project: projectType, index) => (
             <motion.div
               key={project.id}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true }}
               variants={projectVariant}
-              custom={index}
-              className="group relative"
+              whileHover="hover"
+              whileTap="tap"
+              className="group relative cursor-pointer"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-all duration-300" />
-              <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all">
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-all duration-500"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  rotate: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div 
+                className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all"
+                variants={cardHoverVariants}
+                whileHover={{
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+                  borderColor: "#6B7280",
+                }}
+              >
                 <div className="relative h-48 overflow-hidden">
-                  <Image
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    width={400}
-                    height={200}
-                    src={project.image}
-                    alt={project.title}
+                  <motion.div
+                    whileHover={{ scale: 1.15 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <Image
+                      className="w-full h-full object-cover"
+                      width={400}
+                      height={200}
+                      src={project.image}
+                      alt={project.title}
+                    />
+                  </motion.div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"
+                    whileHover={{ opacity: 0.4 }}
+                    transition={{ duration: 0.3 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60" />
                 </div>
 
                 <div className="p-6">
@@ -132,10 +200,10 @@ const Projects: React.FC<projectProps> = ({ isDesktop }) => {
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
         
         <motion.div 
           className="mt-16 text-center"
